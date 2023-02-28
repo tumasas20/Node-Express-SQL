@@ -1,0 +1,10 @@
+{
+    "title": "cao nd",
+    "version": "1.0.1",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "devDependencies": {
+        "casual": "^1.6.2"
+    }
+}
