@@ -1,14 +1,15 @@
 const express = require("express");
+const cors = require("cors");
+
+const cars = ['BMV', "VW", "Porsche"];
 
 const app = express();
 
-const cors = require("cors");
 app.use(cors());
-
-const cars = ['BMV', "VW", "Porsche"];
+app.use(express.static('public'));
 
 app.get("/cars", (req, res) => {
     res.send(cars)
 });
 
-app.listen(8080, () => console.log("The server is runing on port 8080"));
+app.listen(8080, () => console.log("The server is runing on port http://localhost:8080"));

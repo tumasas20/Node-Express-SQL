@@ -4,23 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" defer></script>
     <title>Cao lesson 2</title>
 </head>
 <body>
-    <ul id="carList"></ul>
-    <script>
-      fetch('/').then(response => {
-        return response.json();
-      }).then(data => {
-        let carList = document.getElementById('carList');
-        data.forEach(car => {
-          let li = document.createElement('li');
-          li.textContent = car;
-          carList.appendChild(li);
-        });
-      });
-    </script>
-  </body>
-    
+  <h1>Car list</h1>
+  <ul id="carList"></ul>
 </body>
 </html>
