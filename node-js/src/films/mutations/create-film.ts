@@ -2,7 +2,7 @@ import { RequestHandler } from 'express';
 import { films } from 'films/data';
 import { FilmModel, PartialFilmData } from 'films/types';
 import filmDataValidationSchema from 'films/validation-schemas/film-data-validation-schema';
-import { createId } from '../../helpers/create-id';
+import { createId } from 'helpers/create-id';
 
 const createFilm: RequestHandler<
     {},
