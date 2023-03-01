@@ -14,6 +14,7 @@ app.get("/brands", (_req, res) => {
 
 app.post("/brands", (req, res) => {
     console.log(req.body);
+    brands.push(...req.body);
     res.send('Created brand');
 });
 
