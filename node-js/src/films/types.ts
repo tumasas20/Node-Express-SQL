@@ -10,3 +10,7 @@ export type FilmModel = {
   rating: number,
   trailer: string
 };
+
+export type FilmsData = Omit<FilmModel, 'id'>;
+
+export type PartialFilmData = PartialRecursive<FilmsData>;
