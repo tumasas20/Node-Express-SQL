@@ -8,7 +8,7 @@ addPersonForm.addEventListener("submit", (event) => {
   const formData = new FormData(addPersonForm);
   const name = formData.get("name");
   const surname = formData.get("surname");
-  const navigate = window.location.href="./list.html";
+  
 
   fetch("http://localhost:3000/people", {
     method: "POST",
@@ -27,11 +27,11 @@ addPersonForm.addEventListener("submit", (event) => {
     .then((data) => {
         alert(data);
         addPersonForm.reset();
+        window.location.href="./list.html";
     })
     .catch((error) => {
       console.error(error);
       alert(error.message);
     });
-    navigate;
 });
 
