@@ -3,7 +3,7 @@ import filmDataValidationSchema from 'films/validation-schemas/film-data-validat
 import { FilmModel, PartialFilmData } from '../types';
 import { films } from '../data';
 
-const replaceFilm: RequestHandler<
+const putFilm: RequestHandler<
 { id?: string },
 FilmModel | ErrorResponse,
 PartialFilmData,
@@ -40,4 +40,4 @@ PartialFilmData,
     }
 };
 
-export default replaceFilm;
+export default putFilm;

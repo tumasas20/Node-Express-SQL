@@ -13,4 +13,6 @@ export type FilmModel = {
 
 export type FilmsData = Omit<FilmModel, 'id'>;
 
-export type PartialFilmData = PartialRecursive<FilmsData>;
+export type PartialFilmData = Partial<FilmsData>;
+
+export type FilmDataBody = PartialRecursive<FilmsData>;
