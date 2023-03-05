@@ -7,8 +7,7 @@ const { MongoClient } = require('mongodb');
 
 const port = process.env.PORT || 8080;
 const app = express();
-const URI = 'mongodb+srv://tumasas20:P1HkUkrNG2EWSPVT@cluster0.mhk5nf3.mongodb.net/?retryWrites=true&w=majority';
-const client = new MongoClient(URI);
+const client = new MongoClient(process.env.URI);
 
 app.use(cors());
 app.use(express.json());
