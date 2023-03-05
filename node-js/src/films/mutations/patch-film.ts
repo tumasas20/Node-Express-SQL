@@ -1,7 +1,10 @@
 import { RequestHandler } from 'express';
+import ServerSetupError from 'errors/server-setup-error';
+import handleRequestError from 'helpers/handle-request-error';
+import { films } from 'films/data';
+import FilmNotFoundError from 'films/film-not-found-error';
 import { FilmDataBody, FilmModel } from 'films/types';
 import partialFilmDataValidationSchema from 'films/validation-schemas/partial-film-data-validation-schema';
-import { films } from '../data';
 
 const patchFilm: RequestHandler<
 { id?: string },
@@ -11,26 +14,18 @@ FilmDataBody,
 > = (req, res) => {
     const { id } = req.params;
 
-    if (id === undefined) {
-        res.status(400).json({ error: 'Server setup error' });
-        return;
-    }
+try {
+    if (id === undefined) throw new ServerSetupError();
+    const filmData = partialFilmDataValidationSchema.validateSync(req.body);
+    const foundFilm = films.find((film) => String(film.id) === id);
 
-    try {
-        const filmData = partialFilmDataValidationSchema.validateSync(req.body);
-        const foundFilm = films.find((film) => String(film.id) === id);
+    if (foundFilm === undefined) throw new FilmNotFoundError(id);
 
-        if (foundFilm === undefined) {
-            res.status(404).json({ error: `Film with id '${id}' was not found` });
-            return;
-        }
+    Object.assign(foundFilm, filmData);
 
-        Object.assign(foundFilm, filmData);
-
-        res.status(200).json(foundFilm);
-    } catch (error) {
-        const message = error instanceof Error ? error.message : 'Server error';
-        res.status(400).json({ error: message });
+    res.status(200).json(foundFilm);
+} catch (err) {
+        handleRequestError(err, res);
     }
 };
 

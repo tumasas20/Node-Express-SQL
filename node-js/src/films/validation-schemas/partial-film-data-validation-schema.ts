@@ -1,5 +1,5 @@
+import { PartialFilmData } from 'films/types';
 import * as yup from 'yup';
-import { PartialFilmData } from '../types';
 
 const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.object({
   title: yup.string()

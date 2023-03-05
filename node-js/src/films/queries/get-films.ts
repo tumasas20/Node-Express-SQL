@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { FilmModel } from '../types';
-import { films } from '../data';
+import { films } from 'films/data';
+import { FilmModel } from 'films/types';
 
 const getFilms: RequestHandler<
 {},
