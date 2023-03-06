@@ -13,14 +13,14 @@ const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.o
     actor: yup
     .object({
         role: yup.string()
-        .required('location.country is required')
-        .min(2, 'location.country must have at least 2 letters')
-        .max(32, 'location.country can\'t have more than 32 letters'),
+        .required('actor.role is required')
+        .min(2, 'actor.role must have at least 2 letters')
+        .max(32, 'actor.role can\'t have more than 32 letters'),
 
         fullname: yup.string()
-        .required('location.city is required')
-        .min(2, 'location.city must have at least 2 letters')
-        .max(32, 'location.city can\'t have more than 32 letters'),
+        .required('actor.fullname is required')
+        .min(2, 'actor.fullname must have at least 2 letters')
+        .max(32, 'actor.fullname can\'t have more than 32 letters'),
     }),
 
   images: yup
