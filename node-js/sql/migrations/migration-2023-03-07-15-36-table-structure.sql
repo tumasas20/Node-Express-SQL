@@ -12,6 +12,7 @@ create table user (
     email varchar(64) not null unique,
     password varchar(64) not null,
     imageId int4 unsigned not null unique,
+    importance enum ('USER', 'ADMIN') default 'USER',
     createdAt timestamp default current_timestamp,
     updatedAt timestamp default current_timestamp on update current_timestamp,
     foreign key (imageId) references image(imageId)
