@@ -22,10 +22,21 @@ create table film (
     filmId int4 unsigned primary key auto_increment,
     title varchar(64) not null,
     year varchar(4) not null,
+    played varchar(64) not null,
+    trailer varchar(512) not null,
     userId int4 unsigned not null,
     createdAt timestamp default current_timestamp,
     updatedAt timestamp default current_timestamp on update current_timestamp,
     foreign key (userId) references user(userId)
+);
+
+create table user_film_rating (
+    filmId int4 unsigned not null,
+    userId int4 unsigned not null,
+    amount int1 unsigned not null,
+    foreign key (filmId) references film(filmId),
+    foreign key (userId) references user(userId),
+    primary key (filmId, userId)
 );
 
 create table actor (

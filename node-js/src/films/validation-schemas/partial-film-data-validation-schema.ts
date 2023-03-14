@@ -6,11 +6,10 @@ const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.o
     .min(2, 'title must have at least 2 letters')
     .max(32, 'title can\'t have more than 32 letters'),
 
-    year: yup.string()
+  year: yup.string()
     .required('year are required'),
-    // pasitikslinti ar string ar number geriau
 
-    actor: yup
+  actor: yup
     .object({
         role: yup.string()
         .required('actor.role is required')
@@ -26,12 +25,7 @@ const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.o
   images: yup
     .array(yup.string().required()),
 
-  rating: yup.number()
-    .positive('rating must be positive')
-    .min(1, 'rating must be at least 1')
-    .max(10, 'rating can\'t be more than 10'),
-
-    trailer: yup.string(),
+  trailer: yup.string(),
 }).strict(true);
 
 export default partialFilmDataValidationSchema;

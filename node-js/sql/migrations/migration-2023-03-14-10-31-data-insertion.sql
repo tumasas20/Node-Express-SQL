@@ -10,19 +10,19 @@ insert into user(name, surname, email, password, imageId, importance) values
 ('Alexandra', 'Mcgrath', 'zalexiaz@gmail.com', 'laikinas', 3, 'USER'),
 ('Laura', 'Keith', 'christinecamlong@gmail.com', 'laikinas', 4, 'USER');
 
-insert into film(userId, title, year) values
-(2, 'The Dark Knight', '2008'),
-(2, 'Inception', '2010'),
-(2, 'The Green Mile', '1999'),
-(3, 'The Matrix', '1999'),
-(3, 'The Thing', '1982'),
-(3, 'A Beautiful Mind', '2001'),
-(4, 'Scarface', '1983'),
-(4, 'Oldeuboi', '2003'),
-(4, 'Alien', '1979'),
-(2, 'Parasite', '2019'),
-(3, 'Léon', '1994'),
-(4, 'Back to the Future', '1985');
+insert into film(userId, title, year, played, trailer) values
+(2, 'The Dark Knight', '2008', 'Batman', 'https://www.youtube.com/embed/EXeTwQWrcwY'),
+(2, 'Inception', '2010', 'Cobb', 'https://www.youtube.com/embed/YoHD9XEInc0'),
+(2, 'The Green Mile', '1999', 'death row prison guard', 'https://www.youtube.com/embed/Ki4haFrqSrw'),
+(3, 'The Matrix', '1999', 'Neo', 'https://www.youtube.com/embed/vKQi3bBA1y8'),
+(3, 'The Thing', '1982', 'R.J. MacReady', 'https://www.youtube.com/embed/5ftmr17M-a4'),
+(3, 'A Beautiful Mind', '2001', 'Nash', 'https://www.youtube.com/embed/9wZM7CQY130'),
+(4, 'Scarface', '1983', 'Tony Montana', 'https://www.youtube.com/embed/7pQQHnqBa2E'),
+(4, 'Oldeuboi', '2003', 'Oh Dae-su', 'https://www.youtube.com/embed/2HkjrJ6IK5E'),
+(4, 'Alien', '1979', 'Dallas', 'https://www.youtube.com/embed/LjLamj-b0I8'),
+(2, 'Parasite', '2019', 'Kim Ki-taek', 'https://www.youtube.com/embed/5xH0HfJHsaY'),
+(3, 'Léon', '1994', 'Léon', 'https://www.youtube.com/embed/jawVxq1Iyl0'),
+(4, 'Back to the Future', '1985', 'Marty McFly', 'https://www.youtube.com/embed/qvsgGtivCgs');
 
 insert into actor(fullname) values
   ('Christian Bale'),

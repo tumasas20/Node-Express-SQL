@@ -1,8 +1,8 @@
+import config from 'config';
 import { RequestHandler } from 'express';
-import { films } from 'films/data';
+import SQL from 'films/sql';
 import { FilmModel } from 'films/types';
 import mysql from 'mysql2/promise';
-import config from '../../config/index';
 
 const getFilms: RequestHandler<
 {},
@@ -12,13 +12,16 @@ undefined,
 > = async (req, res) => {
     const connection = await mysql.createConnection(config.database);
 
-    const [queryResult] = await connection.query('SELECT * From ts14.film;');
+    const sql = `
+    ${SQL.SELECT}
+    ${SQL.GROUP}
+    `;
 
-    console.log(queryResult);
+    const [films] = await connection.query(sql);
 
     connection.end();
 
-    res.json(films);
+    res.json(films as FilmModel[]);
 };
 
 export default getFilms;

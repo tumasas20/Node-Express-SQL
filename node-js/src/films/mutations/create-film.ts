@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
 import createId from 'helpers/create-id';
 import handleRequestError from 'helpers/handle-request-error';
-import { films } from 'films/data';
 import { FilmModel, FilmDataBody } from 'films/types';
 import filmDataValidationSchema from 'films/validation-schemas/film-data-validation-schema';
 

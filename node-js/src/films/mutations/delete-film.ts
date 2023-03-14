@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
-import { films } from 'films/data';
 import FilmNotFoundError from 'films/film-not-found-error';
 import { FilmModel } from 'films/types';
 
