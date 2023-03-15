@@ -1,4 +1,4 @@
-export type FilmModel = {
+export type FilmViewModel = {
   id: number,
   title: string,
   year: string,
@@ -17,7 +17,7 @@ export type FilmModel = {
   trailer: string
 };
 
-export type FilmsData = Omit<FilmModel, 'id' | 'host' | 'rating'>;
+export type FilmsData = Omit<FilmViewModel, 'id' | 'host' | 'rating'>;
 
 export type PartialFilmData = Partial<FilmsData>;
 

@@ -2,12 +2,12 @@ import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
 import FilmNotFoundError from 'films/film-not-found-error';
-import { FilmDataBody, FilmModel } from 'films/types';
+import { FilmDataBody, FilmViewModel } from 'films/types';
 import partialFilmDataValidationSchema from 'films/validation-schemas/partial-film-data-validation-schema';
 
 const patchFilm: RequestHandler<
 { id?: string },
-FilmModel | ErrorResponse,
+FilmViewModel | ErrorResponse,
 FilmDataBody,
 {}
 > = (req, res) => {

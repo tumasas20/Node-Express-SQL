@@ -1,27 +1,15 @@
-import config from 'config';
 import { RequestHandler } from 'express';
-import SQL from 'films/sql';
-import { FilmModel } from 'films/types';
-import mysql from 'mysql2/promise';
+import FilmModel from 'films/films-model';
+import { FilmViewModel } from 'films/types';
 
 const getFilms: RequestHandler<
 {},
-FilmModel[],
+FilmViewModel[],
 undefined,
 {}
 > = async (req, res) => {
-    const connection = await mysql.createConnection(config.database);
-
-    const sql = `
-    ${SQL.SELECT}
-    ${SQL.GROUP}
-    `;
-
-    const [films] = await connection.query(sql);
-
-    connection.end();
-
-    res.json(films as FilmModel[]);
+    const filmViewModelArray = await FilmModel.getFilms();
+    res.json(filmViewModelArray);
 };
 
 export default getFilms;

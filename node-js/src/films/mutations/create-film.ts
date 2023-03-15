@@ -1,12 +1,12 @@
 import { RequestHandler } from 'express';
 import createId from 'helpers/create-id';
 import handleRequestError from 'helpers/handle-request-error';
-import { FilmModel, FilmDataBody } from 'films/types';
+import { FilmViewModel, FilmDataBody } from 'films/types';
 import filmDataValidationSchema from 'films/validation-schemas/film-data-validation-schema';
 
 const createFilm: RequestHandler<
     {},
-    FilmModel | ErrorResponse,
+    FilmViewModel | ErrorResponse,
     FilmDataBody,
     {}
 > = (req, res) => {

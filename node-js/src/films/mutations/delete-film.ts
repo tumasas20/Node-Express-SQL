@@ -1,26 +1,23 @@
 import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
-import FilmNotFoundError from 'films/film-not-found-error';
-import { FilmModel } from 'films/types';
+import { FilmViewModel } from 'films/types';
+import FilmModel from 'films/films-model';
 
 const deleteFilm: RequestHandler<
     { id?: string },
-    FilmModel | ErrorResponse,
+    FilmViewModel | ErrorResponse,
     {},
     {}
-> = (req, res) => {
+> = async (req, res) => {
     const { id } = req.params;
 
     try {
     if (id === undefined) throw new ServerSetupError();
+    const filmViewModel = await FilmModel.getFilm(id);
+    await FilmModel.deleteFilm(id);
 
-    const foundFilmIndex = films.findIndex((film) => String(film.id) === id);
-    if (foundFilmIndex === -1) throw new FilmNotFoundError(id);
-
-    const [foundFilm] = films.splice(foundFilmIndex, 1);
-
-    res.status(200).json(foundFilm);
+    res.status(200).json(filmViewModel);
     } catch (err) {
     handleRequestError(err, res);
     }
