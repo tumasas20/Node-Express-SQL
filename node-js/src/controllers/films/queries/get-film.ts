@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
-import { FilmViewModel } from 'films/types';
+import { FilmViewModel } from 'controllers/films/types';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
-import FilmModel from 'films/films-model';
+import FilmModel from 'controllers/films/films-model';
 
 const getFilm: RequestHandler<
 { id?: string },

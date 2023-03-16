@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
-import { FilmViewModel } from 'films/types';
-import FilmModel from 'films/films-model';
+import { FilmViewModel } from 'controllers/films/types';
+import FilmModel from 'controllers/films/films-model';
 
 const deleteFilm: RequestHandler<
     { id?: string },

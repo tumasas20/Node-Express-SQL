@@ -1,4 +1,4 @@
-import { FilmData } from 'films/types';
+import { FilmData } from 'controllers/films/types';
 import * as yup from 'yup';
 
 const filmDataValidationSchema: yup.ObjectSchema<FilmData> = yup.object({

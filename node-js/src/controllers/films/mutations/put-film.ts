@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
-import { FilmViewModel, FilmDataBody } from 'films/types';
-import filmDataValidationSchema from 'films/validation-schemas/film-data-validation-schema';
-import FilmModel from 'films/films-model';
+import { FilmViewModel, FilmDataBody } from 'controllers/films/types';
+import filmDataValidationSchema from 'controllers/films/validation-schemas/film-data-validation-schema';
+import FilmModel from 'controllers/films/films-model';
 
 const putFilm: RequestHandler<
 { id?: string },

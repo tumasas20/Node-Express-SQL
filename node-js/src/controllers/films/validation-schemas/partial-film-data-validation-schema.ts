@@ -1,4 +1,4 @@
-import { PartialFilmData } from 'films/types';
+import { PartialFilmData } from 'controllers/films/types';
 import * as yup from 'yup';
 
 const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.object({

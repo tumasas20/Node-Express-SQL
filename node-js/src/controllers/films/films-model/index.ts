@@ -1,7 +1,7 @@
-import { FilmViewModel } from 'films/types';
+import { FilmViewModel } from 'controllers/films/types';
 import mysql from 'mysql2/promise';
 import config from 'config';
-import FilmNotFoundError from 'films/film-not-found-error';
+import FilmNotFoundError from 'controllers/films/film-not-found-error';
 import SQL from './sql';
 import { FilmData } from '../types';
 
