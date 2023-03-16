@@ -1,7 +1,7 @@
-import { FilmsData } from 'films/types';
+import { FilmData } from 'films/types';
 import * as yup from 'yup';
 
-const filmDataValidationSchema: yup.ObjectSchema<FilmsData> = yup.object({
+const filmDataValidationSchema: yup.ObjectSchema<FilmData> = yup.object({
   title: yup.string()
     .required('title is required')
     .min(2, 'title must have at least 2 letters')

@@ -1,5 +1,5 @@
 insert into film (title, year, played, trailer, userId) values
-('Scream VI', '2023', 'Tara Carpenter', 'https://www.youtube.com/embed/h74AXqw4Opc', 3);
+('Scream VI', '2023', 'Tara Carpenter', 'https://www.youtube.com/embed/h74AXqw4Opc', 1);
 
 set @created_film_id = last_insert_id();
 
@@ -10,14 +10,12 @@ insert into image (src) values
 ('nuotrauka 4'),
 ('nuotrauka 5');
 
-set @image_id = last_insert_id();
+set @first_image_id = last_insert_id();
 
-insert into film_image (imageId, filmId) values
-(@image_id, @created_film_id),
-(@image_id + 1, @created_film_id),
-(@image_id + 2, @created_film_id),
-(@image_id + 3, @created_film_id),
-(@image_id + 4, @created_film_id);
+insert into film_image (imageId, filmId)
+select imageId, @created_film_id as filmId
+from image
+where imageId >= @first_image_id;
 
 set @actor_id = last_insert_id();
 

@@ -13,7 +13,7 @@ select
         'fullname', ac.fullname,
         'role', f.played
 	) as actor,
-	json_arrayagg(i.src) as images
+	if(count(i.imageId) = 0, json_array(), json_arrayagg(i.src)) as images
 from film as f
 join user as u
 on f.userId = u.userId

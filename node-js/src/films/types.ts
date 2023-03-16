@@ -17,8 +17,8 @@ export type FilmViewModel = {
   trailer: string
 };
 
-export type FilmsData = Omit<FilmViewModel, 'id' | 'host' | 'rating'>;
+export type FilmData = Omit<FilmViewModel, 'id' | 'host' | 'rating'>;
 
-export type PartialFilmData = Partial<FilmsData>;
+export type PartialFilmData = Partial<FilmData>;
 
-export type FilmDataBody = PartialRecursive<FilmsData>;
+export type FilmDataBody = PartialRecursive<FilmData>;

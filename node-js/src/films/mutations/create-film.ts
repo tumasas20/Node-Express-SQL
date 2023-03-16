@@ -1,21 +1,20 @@
 import { RequestHandler } from 'express';
-import createId from 'helpers/create-id';
 import handleRequestError from 'helpers/handle-request-error';
 import { FilmViewModel, FilmDataBody } from 'films/types';
 import filmDataValidationSchema from 'films/validation-schemas/film-data-validation-schema';
+import FilmModel from 'films/films-model';
 
 const createFilm: RequestHandler<
     {},
     FilmViewModel | ErrorResponse,
     FilmDataBody,
     {}
-> = (req, res) => {
+> = async (req, res) => {
     try {
         const filmData = filmDataValidationSchema.validateSync(req.body, { abortEarly: false });
-        const createdFilm = { id: createId(), ...filmData };
-        films.push(createdFilm);
+        const filmViewModel = await FilmModel.createFilm(filmData);
 
-        res.status(201).json(createdFilm);
+        res.status(201).json(filmViewModel);
       } catch (err) {
         handleRequestError(err, res);
       }

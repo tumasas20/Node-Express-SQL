@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import config from 'config';
 import FilmNotFoundError from 'films/film-not-found-error';
 import SQL from './sql';
+import { FilmData } from '../types';
 
 const getFilms = async (): Promise<FilmViewModel[]> => {
     const connection = await mysql.createConnection(config.database);
@@ -67,10 +68,59 @@ const deleteFilm = async (id: string): Promise<void> => {
     await connection.query(prepareSql, bindings);
 };
 
+const createFilm = async (filmData: FilmData): Promise<FilmViewModel> => {
+    const connection = await mysql.createConnection(config.database);
+
+    const prepareSql = `
+    insert into film (title, year, played, trailer, userId) values
+(?, ?, ?, ?, 1);
+
+set @created_film_id = last_insert_id();
+
+insert into image (src) values
+${filmData.images.map(() => '(?)').join(',\n')};
+
+set @first_image_id = last_insert_id();
+
+insert into film_image (imageId, filmId)
+select imageId, @created_film_id as filmId
+from image
+where imageId >= @first_image_id;
+
+set @actor_id = last_insert_id();
+
+insert into actor (fullname, actorId) values
+(?, @actor_id);
+
+insert into role (actorId, filmId) values
+(@actor_id, @created_film_id);
+
+${SQL.SELECT}
+where f.filmId = @created_film_id
+${SQL.GROUP};
+    `;
+
+    const bindings = [
+        filmData.title,
+        filmData.year,
+        filmData.actor.role,
+        filmData.trailer,
+        ...filmData.images,
+        filmData.actor.fullname,
+    ];
+
+    const [queryResult] = await connection.query<mysql.RowDataPacket[][]>(prepareSql, bindings);
+    const [film] = queryResult[queryResult.length - 1] as FilmViewModel[];
+
+    connection.end();
+    return film;
+};
+
 const FilmModel = {
     getFilms,
     getFilm,
     deleteFilm,
+    createFilm,
   };
 
   export default FilmModel;
