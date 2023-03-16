@@ -116,11 +116,93 @@ ${SQL.GROUP};
     return film;
 };
 
+const replaceFilm = async (filmId: string, filmData: FilmData): Promise<FilmViewModel> => {
+    const connection = await mysql.createConnection(config.database);
+
+    const prepareSql = `
+update film
+set title = ?, year = ?, played = ?, trailer = ?
+where filmId = ?;
+
+set @filmImagesIds = (
+  select group_concat(imageId) 
+    from film_image 
+    where filmId = ?
+    group by filmId);
+
+delete from film_image
+where filmId = ?;
+
+delete from image
+where find_in_set(imageId, @filmImagesIds);
+
+set @filmRoleIds = (
+  select group_concat(actorId) 
+    from role 
+    where filmId = ?
+    group by filmId);
+
+delete from role
+where filmId = ?;
+
+delete from actor
+where find_in_set(actorId, @filmRoleIds);
+
+insert into image (src) values
+${filmData.images.map(() => '(?)').join(',\n')};
+
+set @first_image_id = last_insert_id();
+
+insert into film_image(imageId, filmId)
+select imageId, ? as filmId
+from image
+where imageId >= @first_image_id;
+
+set @actor_id = ?;
+
+insert into actor (fullname, actorId) values
+(?, @actor_id);
+
+insert into role (actorId, filmId) values
+(@actor_id, ?);
+
+${SQL.SELECT}
+where f.filmId = ?
+${SQL.GROUP};
+`;
+
+    const bindings = [
+        filmData.title,
+        filmData.year,
+        filmData.actor.role,
+        filmData.trailer,
+        filmId,
+        filmId,
+        filmId,
+        filmId,
+        filmId,
+        ...filmData.images,
+        filmId,
+        filmId,
+        filmData.actor.fullname,
+        filmId,
+        filmId,
+    ];
+
+    const [queryResult] = await connection.query<mysql.RowDataPacket[][]>(prepareSql, bindings);
+    const [film] = queryResult[queryResult.length - 1] as FilmViewModel[];
+
+    connection.end();
+
+    return film;
+};
+
 const FilmModel = {
     getFilms,
     getFilm,
     deleteFilm,
     createFilm,
-  };
+    replaceFilm,
+};
 
-  export default FilmModel;
+export default FilmModel;
