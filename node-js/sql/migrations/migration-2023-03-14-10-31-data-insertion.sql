@@ -5,10 +5,10 @@ insert into image(src) values
 ('https://www.hrdconnect.com/wp-content/uploads/2020/11/Laura-Keith.jpg');
 
 insert into user(name, surname, email, password, imageId, importance) values
-('Mandarinas', 'Plepys', 'admin@gmail.com', 'Druskinikai135!', 1, 'ADMIN'),
-('Nina', 'Faulkner', 'spasibos@gmail.com', 'laikinas', 2, 'USER'),
-('Alexandra', 'Mcgrath', 'zalexiaz@gmail.com', 'laikinas', 3, 'USER'),
-('Laura', 'Keith', 'christinecamlong@gmail.com', 'laikinas', 4, 'USER');
+('Mandarinas', 'Plepys', 'admin@gmail.com', '$2b$10$LnkmOUAVubtkV1aCJ77lzeFUyxKPdp7C1BMMQN3H5B2eEE3BRKv5y', 1, 'ADMIN'),
+('Nina', 'Faulkner', 'spasibos@gmail.com', '$2b$10$46dsQqpZminOLcO99TwhVOtsvx6B/xmDMXw1qMyJiCKyDEvVcSUp6!', 2, 'USER'),
+('Alexandra', 'Mcgrath', 'zalexiaz@gmail.com', '$2b$10$3QLCToZgnE3p4Z8Dtl8QteVpp6zR4WRKvgZSSc40eh97urjB1IuHW', 3, 'USER'),
+('Laura', 'Keith', 'christinecamlong@gmail.com', '$2b$10$Rn5cDNhcyLFXBP0VOa44pu9cH6kGJhVaUSRsrZg4CtjMH5eIe08du', 4, 'USER');
 
 insert into film(userId, title, year, played, trailer) values
 (2, 'The Dark Knight', '2008', 'Batman', 'https://www.youtube.com/embed/EXeTwQWrcwY'),
