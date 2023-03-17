@@ -26,6 +26,7 @@ const filmDataValidationSchema: yup.ObjectSchema<FilmData> = yup.object({
 
   images: yup
     .array(yup.string().required())
+    .min(1, 'at least one image required')
     .required('images are required'),
 
   trailer: yup.string()

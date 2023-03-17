@@ -1,9 +1,8 @@
-import { FilmViewModel } from 'controllers/films/types';
-import mysql from 'mysql2/promise';
 import config from 'config';
+import mysql from 'mysql2/promise';
 import FilmNotFoundError from 'controllers/films/film-not-found-error';
+import { FilmViewModel, FilmData } from 'controllers/films/types';
 import SQL from './sql';
-import { FilmData } from '../types';
 
 const getFilms = async (): Promise<FilmViewModel[]> => {
     const connection = await mysql.createConnection(config.database);
