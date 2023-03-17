@@ -2,8 +2,8 @@ import { RequestHandler } from 'express';
 import handleRequestError from 'helpers/handle-request-error';
 import BcryptService from 'services/bcrypt-service';
 import JwtTokenService from 'services/jwt-token-service';
-import { RegistrationBody, AuthResponse } from '../types';
 import UserModel from '../user-model';
+import { RegistrationBody, AuthResponse } from '../types';
 import registrationBodyValidationSchema from '../validation-schemas/registration-body-validation-shema';
 
 export const register: RequestHandler<
@@ -20,7 +20,7 @@ export const register: RequestHandler<
     } = registrationBodyValidationSchema.validateSync(req.body, { abortEarly: false });
 
     await UserModel.checkEmail(userData.email);
-    const userViewModel = await UserModel.createUser({
+    const { password: notUsed, ...userViewModel } = await UserModel.createUser({
       ...userData,
       password: BcryptService.encrypt(password),
     });

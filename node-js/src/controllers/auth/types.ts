@@ -1,17 +1,15 @@
-export type RegistrationBody = {
-    email: string,
-    password: string,
-    passwordConfirmation: string,
-    name: string,
-    surname: string,
-    image: string,
-  };
+export type RegistrationBody = Omit<UserEntity, 'id' | 'importance'> & {
+  passwordConfirmation: string,
+};
+
+export type Credentials = {
+  email: string,
+  password: string,
+};
 
 export type UserData = Omit<RegistrationBody, 'passwordConfirmation'>;
 
-export type UserViewModel = Omit<RegistrationBody, 'password' | 'passwordConfirmation'> & {
-  id: number,
-};
+export type UserViewModel = Omit<UserEntity, 'password'>;
 
 export type AuthResponse = {
   user: UserViewModel,

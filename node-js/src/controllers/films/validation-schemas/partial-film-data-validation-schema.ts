@@ -23,7 +23,7 @@ const partialFilmDataValidationSchema: yup.ObjectSchema<PartialFilmData> = yup.o
     }),
 
   images: yup
-    .array(yup.string().required()),
+    .array(yup.string().required().url('image must be accessible')),
 
   trailer: yup.string(),
 }).strict(true);

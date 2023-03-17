@@ -67,12 +67,12 @@ const deleteFilm = async (id: string): Promise<void> => {
     await connection.query(prepareSql, bindings);
 };
 
-const createFilm = async (filmData: FilmData): Promise<FilmViewModel> => {
+const createFilm = async (filmData: FilmData, userId: number): Promise<FilmViewModel> => {
     const connection = await mysql.createConnection(config.database);
 
     const prepareSql = `
     insert into film (title, year, played, trailer, userId) values
-(?, ?, ?, ?, 1);
+(?, ?, ?, ?, ?);
 
 set @created_film_id = last_insert_id();
 
@@ -104,6 +104,7 @@ ${SQL.GROUP};
         filmData.year,
         filmData.actor.role,
         filmData.trailer,
+        userId,
         ...filmData.images,
         filmData.actor.fullname,
     ];
