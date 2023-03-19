@@ -1,7 +1,8 @@
 import mysql from 'mysql2/promise';
 import config from 'config';
 import NotFoundError from 'errors/not-found-error';
-import { UserData } from '../types';
+import BcryptService from 'services/bcrypt-service';
+import { UserData } from 'controllers/auth/types';
 import SQL from './sql';
 
 const checkEmail = async (email: string): Promise<true> => {
@@ -39,7 +40,7 @@ where u.userId = last_insert_id();
   const bindings = [
     userData.image,
     userData.email,
-    userData.password,
+    BcryptService.encrypt(userData.password),
     userData.name,
     userData.surname,
   ];

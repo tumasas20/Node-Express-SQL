@@ -2,8 +2,8 @@ import { RequestHandler } from 'express';
 import ServerSetupError from 'errors/server-setup-error';
 import handleRequestError from 'helpers/handle-request-error';
 import ForbiddenError from 'errors/forbidden-error';
-import { FilmViewModel } from 'controllers/films/types';
-import FilmModel from 'controllers/films/films-model';
+import { FilmViewModel } from '../types';
+import FilmModel from '../films-model';
 
 const deleteFilm: RequestHandler<
     { id?: string },
@@ -14,18 +14,18 @@ const deleteFilm: RequestHandler<
     const { id } = req.params;
 
     try {
-    if (id === undefined || req.authUser === undefined) throw new ServerSetupError();
-    const filmViewModel = await FilmModel.getFilm(id);
+      if (id === undefined || req.authUser === undefined) throw new ServerSetupError();
+      const filmViewModel = await FilmModel.getFilm(id);
 
-    if (req.authUser.importance !== 'ADMIN' && req.authUser.id !== filmViewModel.host.id) {
-        throw new ForbiddenError();
-    }
+      if (req.authUser.importance !== 'ADMIN' && req.authUser.id !== filmViewModel.host.id) {
+          throw new ForbiddenError();
+      }
 
-    await FilmModel.deleteFilm(id);
+      await FilmModel.deleteFilm(id);
 
-    res.status(200).json(filmViewModel);
+      res.status(200).json(filmViewModel);
     } catch (err) {
-    handleRequestError(err, res);
+      handleRequestError(err, res);
     }
 };
 

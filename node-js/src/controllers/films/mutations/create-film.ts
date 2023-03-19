@@ -13,7 +13,6 @@ const createFilm: RequestHandler<
 > = async (req, res) => {
     try {
         if (req.authUser === undefined) throw new ServerSetupError();
-
         const filmData = filmDataValidationSchema.validateSync(req.body, { abortEarly: false });
 
         const filmViewModel = await FilmModel.createFilm(filmData, req.authUser.id);

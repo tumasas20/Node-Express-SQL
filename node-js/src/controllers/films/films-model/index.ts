@@ -65,6 +65,7 @@ const deleteFilm = async (id: string): Promise<void> => {
 
     const bindings = [id, id, id, id, id, id, id];
     await connection.query(prepareSql, bindings);
+    connection.end();
 };
 
 const createFilm = async (filmData: FilmData, userId: number): Promise<FilmViewModel> => {
@@ -113,6 +114,7 @@ ${SQL.GROUP};
     const [film] = queryResult[queryResult.length - 1] as FilmViewModel[];
 
     connection.end();
+
     return film;
 };
 
